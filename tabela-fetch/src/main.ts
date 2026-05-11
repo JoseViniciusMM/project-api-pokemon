@@ -1,8 +1,4 @@
-import './style.css'
-
-
-
-
+import './style.css';
 
 async function carregarDados() {
   try {
@@ -17,7 +13,7 @@ async function carregarDados() {
       linhas += `
         <tr>
           <td>${pokemon.name}</td>
-          <td><a href="${pokemon.url}</a></td>
+          <td><a href="${pokemon.url}" target="_blank">Ver detalhes</a></td>
         </tr>
       `;
     });
