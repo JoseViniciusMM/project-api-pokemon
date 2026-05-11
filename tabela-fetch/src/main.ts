@@ -7,10 +7,25 @@ interface Pokemon {
   id?: number;
 }
 
-async function carregarDados() {
+
+let urlProximo: string | null = null;
+let urlAnterior: string | null = null;
+
+const botaoProximo = document.getElementById('proximo') as HTMLButtonElement;
+const botaoAnterior = document.getElementById('anterior') as HTMLButtonElement;
+
+async function carregarDados(url: string) {
   try {
-    const resposta = await fetch('https://pokeapi.co/api/v2/pokemon');
+    const resposta = await fetch(url);
     const dados = await resposta.json();
+
+    urlProximo = dados.next;
+    urlAnterior = dados.previous;
+
+    botaoAnterior.disabled = !urlAnterior;
+    botaoProximo.disabled = !urlProximo;
+
+
 
     const tabelaCorpo = document.getElementById('corpoT') as HTMLTableSectionElement;
 
@@ -58,4 +73,12 @@ async function carregarDados() {
   }
 }
 
-carregarDados();
+botaoAnterior.addEventListener('click', () => {
+  if (urlAnterior) { carregarDados(urlAnterior); }
+});
+
+botaoProximo.addEventListener('click', () => {
+  if (urlProximo) { carregarDados(urlProximo); }
+});
+
+carregarDados('https://pokeapi.co/api/v2/pokemon');
