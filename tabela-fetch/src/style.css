@@ -1,56 +1,64 @@
 .tabela { 
-    border: 1px solid black;
     border-collapse: collapse;
-    width: 100%;
+    width: auto;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: sans-serif;
+    border: 1px solid #dddddd;
 }
 
 .tabela th, .tabela td {
-    border: 1px solid black;
-    padding: 8px;
+    padding: 8px 20px;
+    text-align: center;
+    border-bottom: 1px solid #dddddd;
 }
 
 .tabela th {
-    background-color: black;
-    color: #FFFFFF;
-}
-
-.tabela tr:hover {
-    background-color: #6b6969;
+    background-color: #333;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 0.85rem;
 }
 
 .tabela tr:nth-child(even) {
-    background-color: #f2f2f2;
-}   
+    background-color: #f8f9fa;
+}
+
+.tabela tr:hover {
+    background-color: #f1f1f1;
+}
 
 .botoes {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
     margin: 20px 0;
 }
 
 .botoes button {
-    background-color: #000000; 
+    background-color: #333; 
     color: #ffffff;            
-    border: 2px solid #000000;
-    padding: 10px 25px;
-    font-size: 16px;
-    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease; 
-    border-radius: 4px;
-    text-transform: uppercase;
+    border-radius: 6px;
+}
+
+.botoes button:hover:not(:disabled) {
+    background-color: #555;
 }
 
 .botoes button:disabled {
-    background-color: #cccccc; 
-    border-color: #cccccc;
-    color: #666666;            
+    background-color: #e0e0e0; 
+    color: #a1a1a1;            
     cursor: not-allowed;       
-    opacity: 0.7;
 }
 
 .tabela td img {
     display: block;
     margin: 0 auto;
+    width: 50px;
+    height: auto;
 }
