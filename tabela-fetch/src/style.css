@@ -22,7 +22,6 @@
     background-color: #f2f2f2;
 }   
 
-/* Container dos botões para centralizar */
 .botoes {
     display: flex;
     justify-content: center;
@@ -30,30 +29,27 @@
     margin: 20px 0;
 }
 
-/* Estilo base dos botões */
 .botoes button {
-    background-color: #000000; /* Fundo preto */
-    color: #ffffff;            /* Texto branco */
+    background-color: #000000; 
+    color: #ffffff;            
     border: 2px solid #000000;
     padding: 10px 25px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: all 0.3s ease; /* Suaviza a transição de cores */
+    transition: all 0.3s ease; 
     border-radius: 4px;
     text-transform: uppercase;
 }
 
-/* Estado Desabilitado (Chave para o que você pediu) */
 .botoes button:disabled {
-    background-color: #cccccc; /* Cinza claro */
+    background-color: #cccccc; 
     border-color: #cccccc;
-    color: #666666;            /* Texto mais apagado */
-    cursor: not-allowed;       /* Muda o ícone do mouse */
+    color: #666666;            
+    cursor: not-allowed;       
     opacity: 0.7;
 }
 
-/* Estilo extra para as imagens na tabela ficarem centralizadas */
 .tabela td img {
     display: block;
     margin: 0 auto;
