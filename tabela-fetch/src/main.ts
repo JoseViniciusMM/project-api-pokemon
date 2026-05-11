@@ -1,42 +1,61 @@
 import './style.css';
 
+interface Pokemon {
+  name: string;
+  url: string;
+  foto?: string; 
+  id?: number;
+}
+
 async function carregarDados() {
   try {
     const resposta = await fetch('https://pokeapi.co/api/v2/pokemon');
     const dados = await resposta.json();
-    console.log(dados);
 
-    const tabela = document.getElementById('corpoT') as HTMLTableElement;
+    const tabelaCorpo = document.getElementById('corpoT') as HTMLTableSectionElement;
+
+    const listaPromessas = dados.results.map(async (p: Pokemon) => {
+      const res = await fetch(p.url);
+      const detalhes = await res.json();
+      
+      return {
+        ...p,
+        id: detalhes.id,
+        foto: detalhes.sprites.front_default
+      };
+    });
+
+    const pokemonsCompletos = await Promise.all(listaPromessas);
+
     let linhas = '';
-
-    dados.results.forEach((pokemon: { name: string; url: string }) => {
+    pokemonsCompletos.forEach(pokemon => {
       linhas += `
         <tr>
-          <td>${pokemon.name}</td>
-          <td><a href="${pokemon.url}" target="_blank">Ver detalhes</a></td>
+          <td>${pokemon.id}</td>
+          <td><strong>${pokemon.name.toUpperCase()}</strong></td>
+          <td>
+            <img src="${pokemon.foto}" alt="${pokemon.name}" width="60">
+          </td>
+          <td>
+            <a href="${pokemon.url}" target="_blank">Link API</a>
+          </td>
         </tr>
       `;
     });
 
-    tabela.innerHTML = `
+    tabelaCorpo.innerHTML = `
       <tr>
+        <th>ID</th>
         <th>Nome</th>
-        <th>Link</th>
+        <th>Miniatura</th>
+        <th>Detalhes</th>
       </tr>
       ${linhas}
     `;
-  } 
 
-  catch (erro) {
-    console.error('Erro ao buscar dados:', erro);
+  } catch (erro) {
+    console.error('Erro na requisição:', erro);
   }
 }
 
 carregarDados();
-
-
-//adicionar function que carrega foto do pokemon, usando a url do pokemon para pegar o id e depois usar a url da imagem do pokemon com o id para mostrar a imagem na tabela.
-
-//adicionar function do btn de proxima pagina e retroceder, validação que a primeira pagina nao da pra retroceder
-
-//a
